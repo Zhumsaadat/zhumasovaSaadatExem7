@@ -11,13 +11,13 @@ interface Props extends React.PropsWithChildren{
   name: string,
   price: number,
   icon: any,
-  id: number
+  id: number,
+  orderThisFood: () => void;
 }
 
-const Food: React.FC<Props> = ({name, price, icon, children, id}) => {
-
+const Food: React.FC<Props> = ({name, price, icon, children, id, orderThisFood}) => {
     return (
-        <div className="food">
+        <div onClick={orderThisFood} className="food" id={id}>
           <div className="iconFood"><FontAwesomeIcon icon={icon} /></div>
           <div className="foodInfo">
             <h4 className="foodName">{name}</h4>

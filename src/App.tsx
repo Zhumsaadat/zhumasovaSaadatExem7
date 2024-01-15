@@ -24,15 +24,16 @@ interface Orders extends React.PropsWithChildren {
 function App() {
   const [foods, setFoot] = useState<Props[]>([
     {name: 'Hamburger', price: 120,  icon: faBurger, id: 1},
-    {name: 'Hamburger', price: 120,  icon: faBurger, id: 2},
-    {name: 'Hamburger', price: 120,  icon: faBurger, id: 3},
-    {name: 'Hamburger', price: 120,  icon: faBurger, id: 4},
-    {name: 'Hamburger', price: 120,  icon: faBurger, id: 5},
-    {name: 'Hamburger', price: 120,  icon: faBurger, id: 6},
+    {name: 'Hamburger2', price: 120,  icon: faBurger, id: 2},
+    {name: 'Hamburger3', price: 120,  icon: faBurger, id: 3},
+    {name: 'Hamburger4', price: 120,  icon: faBurger, id: 4},
+    {name: 'Hamburger5', price: 120,  icon: faBurger, id: 5},
+    {name: 'Hamburger6', price: 120,  icon: faBurger, id: 6},
   ]);
 
   const [orders, setOrder] = useState<Orders[]>([
-    // {name: "Hamburger", price: 80, count: 0, id: 1}
+     {name: "Hamburger", price: 80, count: 0, id: 1},
+    {name: "Hamburger", price: 80, count: 0, id: 1}
   ]);
 
   const display = () => {
@@ -42,7 +43,30 @@ function App() {
       return "d-none"
     }
   }
-  console.log(display())
+
+  const orderThisFood = (e) => {
+    const id = e.currentTarget.id - 1;
+    const orderThisFood: Orders = {
+        name: foods[id].name,
+        count: 1,
+        price: foods[id].price,
+        id: orders.length + 1,
+      };
+
+      if(orders.find(food => food.name === orderThisFood.name)){
+        setOrder((prevState) => {
+          prevState.find(food => food.name === orderThisFood.name)!.count++
+          return [...prevState]
+        })
+        console.log(orders.find(food => food.name === orderThisFood.name))
+      } else {
+        setOrder((prevState) => {
+          return [...prevState, orderThisFood];
+        })
+      }
+
+    }
+
 
   return (
    <div className="dFlex">
@@ -55,7 +79,8 @@ function App() {
                  name={food.name}
                  price={food.price}
                  icon={food.icon}
-                 id={foods.length + 1}
+                 id= {food.id}
+                 orderThisFood={orderThisFood}
                />
              </div>
            );
@@ -76,7 +101,7 @@ function App() {
                name={food.name}
                price={food.price}
                count={food.count}
-               id={foods.length + 1}
+               id= {food.id}
              />
            </div>)})}
        </div>
