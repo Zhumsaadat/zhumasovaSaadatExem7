@@ -55,7 +55,12 @@ function App() {
 
     if (orders.find(food => food.name === orderThisFood.name)) {
       setOrder((prevState) => {
-        prevState.find(food => food.name === orderThisFood.name)!.count++
+        const thisFood = prevState.find(food => food.name === orderThisFood.name)
+        if(thisFood){
+          thisFood.count++;
+          thisFood.price *= thisFood.count;
+        }
+
         return [...prevState]
       })
       console.log(orders.find(food => food.name === orderThisFood.name))
@@ -70,12 +75,22 @@ function App() {
 
   const deleteFood = (e) => {
     const j = e.currentTarget.id;
-    let index = orders.findIndex(el => el.name === j);
     setOrder((prevState) => {
-      prevState.splice(index, 1);
-      return [...prevState]
-    })
+      const thisFood = prevState.find(food => food.name === j)
+      if(thisFood){
+        if(thisFood.count > 1){
+          thisFood.count--;
+          thisFood.price -= foods.find(food => food.name === j).price;
+          return[...prevState]
+        }
+        else if (thisFood < 2) {
+          const thisFoodIndex = prevState.findIndex(food => food.name === j);
+          prevState.splice(thisFoodIndex, 1);
+          return [...prevState]
+        }
+      }
 
+    })
   };
 
   const sum = () => {
@@ -117,7 +132,7 @@ function App() {
             return (<div key={index}>
               <OrderedFood
                 name={food.name}
-                price={food.count * food.price}
+                price={food.price}
                 count={food.count}
                 id={orders.length - 1}
                 onClickedDelete={deleteFood}
