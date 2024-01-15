@@ -11,10 +11,11 @@ interface Order extends React.PropsWithChildren {
   count: number,
   price: number
   id: number,
+  onClickedDelete: () => void,
 }
 
 
-const OrderedFood: React.FC<Order> = ({name, count, price, id}) => {
+const OrderedFood: React.FC<Order> = ({name, count, price, id, onClickedDelete}) => {
 
 
   return (
@@ -22,7 +23,7 @@ const OrderedFood: React.FC<Order> = ({name, count, price, id}) => {
       <div>{name}</div>
       <strong>{count}x</strong>
       <div>{price}KGS</div>
-      <div className="iconDelete"><FontAwesomeIcon icon="fa-solid fa-x" /></div>
+      <div id={name} onClick={onClickedDelete} className="iconDelete"><FontAwesomeIcon icon="fa-solid fa-x" /></div>
     </div>
   );
 };
