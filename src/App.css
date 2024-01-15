@@ -5,3 +5,32 @@
   text-align: center;
 }
 
+.menuBlock {
+  width: 50%;
+}
+
+.foods {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.dFlex {
+  display: flex;
+}
+
+.bill {
+  width: 50%;
+}
+
+.titleMenuBlock {
+
+}
+
+.d-none {
+  display: none;
+}
+
+.d-block {
+  display: block;
+}

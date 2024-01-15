@@ -1,0 +1,17 @@
+.food {
+  display: flex;
+  border: 1px solid black;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+.iconFood {
+  font-size: 70px;
+}
+
+.foodInfo {
+  padding-left: 10px;
+}
+.foodName {
+ text-align: start;
+}

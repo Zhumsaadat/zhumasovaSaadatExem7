@@ -1,0 +1,9 @@
+.orderedFoods {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.iconDelete {
+  color: white;
+}
